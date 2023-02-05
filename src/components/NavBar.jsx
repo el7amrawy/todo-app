@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const NavBar = ({ setTheme, theme }) => {
   return (
-    <nav className="navbar bg-base-100">
+    <nav className="navbar bg-base-100 shadow">
       <div className="navbar-start"></div>
       <div className="navbar-center">
         <a className="btn btn-ghost normal-case text-4xl">#todo</a>
