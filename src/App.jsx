@@ -57,8 +57,8 @@ const App = () => {
     ev.preventDefault();
     if (todo.length)
       setList((oldList) => [
-        ...oldList,
-        { id: nanoid(), text: todo, status: "active" },
+         { id: nanoid(), text: todo, status: "active" },
+         ...oldList,
       ]);
     setTodo("");
   };
