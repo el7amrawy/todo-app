@@ -12,16 +12,37 @@ const App = () => {
   const [list, setList] = useState(
     JSON.parse(localStorage.getItem("todoList")) || []
   );
-
   const [todo, setTodo] = useState("");
   const [tab, setTab] = useState("all");
-
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") ||
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light"
+  );
   /** ============ effects ============ **/
 
   useEffect(() => {
     localStorage.setItem("todoList", JSON.stringify(list));
   }, [list]);
 
+  // useEffect(() => {
+  //   const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
+  //   if (darkThemeMq.matches) {
+  //     document.documentElement.setAttribute("data-theme", "dark");
+  //   } else {
+  //     document.documentElement.setAttribute("data-theme", "winter");
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    if (theme === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "winter");
+    }
+  }, [theme]);
   /** ============ handlers ============ **/
 
   const clickHandler = (ev) => {
@@ -39,10 +60,10 @@ const App = () => {
   const listElems = list.map((elem) => (
     <ListElem elem={elem} setList={setList} key={elem.id} />
   ));
-  // console.log(list);
+
   return (
     <>
-      <NavBar />
+      <NavBar theme={theme} setTheme={setTheme} />
       <main className="flex items-center flex-col py-14">
         <Tabs setTab={setTab} />
         <div className="form-control mt-10">

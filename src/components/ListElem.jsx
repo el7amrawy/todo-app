@@ -38,7 +38,7 @@ const ListElem = ({ elem, setList }) => {
       {checked ? (
         <FontAwesomeIcon
           icon={faTrashCan}
-          className=" text-red-500"
+          className=" text-red-500 text-xl"
           onClick={clickHandler}
         />
       ) : null}
