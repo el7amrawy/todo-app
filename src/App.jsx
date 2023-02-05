@@ -14,12 +14,7 @@ const App = () => {
   );
   const [todo, setTodo] = useState("");
   const [tab, setTab] = useState("all");
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") ||
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light"
-  );
+  const [theme, setTheme] = useState(localStorage.getItem("theme"));
   /** ============ effects ============ **/
 
   useEffect(() => {
@@ -39,8 +34,15 @@ const App = () => {
     localStorage.setItem("theme", theme);
     if (theme === "dark") {
       document.documentElement.setAttribute("data-theme", "dark");
-    } else {
+    } else if (theme === "light") {
       document.documentElement.setAttribute("data-theme", "winter");
+    } else {
+      const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
+      if (darkThemeMq.matches) {
+        setTheme("dark");
+      } else {
+        setTheme("light");
+      }
     }
   }, [theme]);
   /** ============ handlers ============ **/
