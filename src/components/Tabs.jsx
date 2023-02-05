@@ -1,6 +1,9 @@
-const Tabs = ({ setTab }) => {
-  const clickHandler = (ev) => {
-    const status = ev.target.innerText.toLocaleLowerCase();
+import { useEffect } from "react";
+
+const Tabs = ({ setTab, tab }) => {
+  /** ============ funcs ============ **/
+
+  const activeTab = (status) => {
     const tabElems = document.querySelectorAll("div.tabs a.tab");
     tabElems.forEach((elem) => {
       if (elem.innerText.toLocaleLowerCase() === status) {
@@ -9,6 +12,19 @@ const Tabs = ({ setTab }) => {
         elem.classList.remove("tab-active");
       }
     });
+  };
+
+  /** ============ effects ============ **/
+
+  useEffect(() => {
+    activeTab(tab);
+  }, []);
+
+  /** ============ handlers ============ **/
+
+  const clickHandler = (ev) => {
+    const status = ev.target.innerText.toLocaleLowerCase();
+    activeTab(status);
     setTab(status);
   };
 
@@ -17,7 +33,7 @@ const Tabs = ({ setTab }) => {
       <a className="tab tab-lg tab-bordered" onClick={clickHandler}>
         All
       </a>
-      <a className="tab tab-lg tab-bordered tab-active" onClick={clickHandler}>
+      <a className="tab tab-lg tab-bordered" onClick={clickHandler}>
         Active
       </a>
       <a className="tab tab-lg tab-bordered" onClick={clickHandler}>

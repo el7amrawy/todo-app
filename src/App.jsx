@@ -13,8 +13,9 @@ const App = () => {
     JSON.parse(localStorage.getItem("todoList")) || []
   );
   const [todo, setTodo] = useState("");
-  const [tab, setTab] = useState("all");
+  const [tab, setTab] = useState(localStorage.getItem("tab") || "all");
   const [theme, setTheme] = useState(localStorage.getItem("theme"));
+
   /** ============ effects ============ **/
 
   useEffect(() => {
@@ -45,6 +46,11 @@ const App = () => {
       }
     }
   }, [theme]);
+
+  useEffect(() => {
+    localStorage.setItem("tab", tab);
+  }, [tab]);
+
   /** ============ handlers ============ **/
 
   const clickHandler = (ev) => {
@@ -67,7 +73,7 @@ const App = () => {
     <>
       <NavBar theme={theme} setTheme={setTheme} />
       <main className="flex items-center flex-col py-14">
-        <Tabs setTab={setTab} />
+        <Tabs setTab={setTab} tab={tab} />
         <div className="form-control mt-10">
           <label className="input-group">
             <input
