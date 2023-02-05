@@ -7,13 +7,26 @@ const ListElem = ({ elem, setList }) => {
 
   const changeHandler = (ev) => {
     setList((oldList) => {
-      return oldList.map((oldElem) => {
-        if (elem.id === oldElem.id) {
-          oldElem.status = checked ? "active" : "completed";
-        }
+      // return oldList.map((oldElem) => {
+      //   if (elem.id === oldElem.id) {
+      //     oldElem.status = checked ? "active" : "completed";
+      //   }
 
-        return oldElem;
-      });
+      //   return oldElem;
+      // });
+      let n, el;
+      const list = [...oldList];
+      for (let i = 0; i < oldList.length; i++) {
+        if (oldList[i].id === elem.id) {
+          oldList[i].status = checked ? "active" : "completed";
+          n = i;
+          el = oldList[i];
+        }
+      }
+      list.splice(n, 1);
+      list.unshift(el);
+      // console.log(list);
+      return list;
     });
     setChecked(!checked);
   };
