@@ -1,0 +1,57 @@
+version: 2.1
+orbs:
+  node: circleci/node@5.0.2
+jobs:
+  build:
+    docker:
+      - image: "cimg/base:stable"
+    steps:
+      - node/install:
+          node-version: "18.13.0"
+      - checkout
+      - run:
+          name: Install packages
+          command: |
+            npm install
+      - run:
+          name: Install packages
+          command: |
+            npm run build
+  deploy:
+    docker:
+      - image: "cimg/base:stable"
+    steps:
+      - node/install:
+          node-version: "18.13.0"
+      - checkout
+      - run:
+          name: Install packages
+          command: |
+            npm install
+      - run:
+          name: Install packages
+          command: |
+            npm run build
+      - run:
+          name: Configure git
+          command: |
+            git config user.email "circleci@circleci.com" && git config user.name "circleci"
+      - run:
+          name: Deploy
+          command: |
+            npm install && npm run deploy
+workflows:
+  build and deploy:
+    jobs:
+      - build
+      - hold:
+          filters:
+            branches:
+              only:
+                - master
+          type: approval
+          requires:
+            - build
+      - deploy:
+          requires:
+            - hold
