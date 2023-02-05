@@ -9,7 +9,9 @@ const Active = ({ list, setList, tab }) => {
   });
 
   return (
-    <div className="form-control mt-10 min-w-[360px]">{activeListElems}</div>
+    <div className="form-control mt-10 min-w-[360px] px-3">
+      {activeListElems}
+    </div>
   );
 };
 

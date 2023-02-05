@@ -72,7 +72,7 @@ const App = () => {
   return (
     <>
       <NavBar theme={theme} setTheme={setTheme} />
-      <main className="flex items-center flex-col py-14">
+      <main className="flex items-center justify-center flex-col py-14">
         <Tabs setTab={setTab} tab={tab} />
         {tab === "all" || tab === "active" ? (
           <div className="form-control mt-10">
@@ -80,7 +80,7 @@ const App = () => {
               <input
                 type="text"
                 placeholder="add details"
-                className="input input-bordered w-[300px]"
+                className="input input-bordered min-w-[280px] max-w-[60vw]"
                 value={todo}
                 onChange={(ev) => setTodo(ev.target.value)}
               />
@@ -95,7 +95,9 @@ const App = () => {
         ) : tab === "completed" ? (
           <Completed list={list} setList={setList} tab={tab} />
         ) : (
-          <div className="form-control mt-10 min-w-[360px]">{listElems}</div>
+          <div className="form-control mt-10 min-w-[360px] px-3">
+            {listElems}
+          </div>
         )}
       </main>
     </>

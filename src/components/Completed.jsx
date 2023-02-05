@@ -8,7 +8,7 @@ const Completed = ({ list, setList, tab }) => {
   ));
 
   return (
-    <div className="form-control mt-10 min-w-[360px]">
+    <div className="form-control mt-10 min-w-[360px] px-4">
       {completedListElems}
       {list.length && completedListElems.length ? (
         <div className=" mt-10 text-right">
