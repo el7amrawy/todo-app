@@ -66,7 +66,7 @@ const App = () => {
   /** ============ elems ============ **/
 
   const listElems = list.map((elem) => (
-    <ListElem elem={elem} setList={setList} key={elem.id} />
+    <ListElem elem={elem} setList={setList} key={elem.id} tab={tab} />
   ));
 
   return (
@@ -74,24 +74,26 @@ const App = () => {
       <NavBar theme={theme} setTheme={setTheme} />
       <main className="flex items-center flex-col py-14">
         <Tabs setTab={setTab} tab={tab} />
-        <div className="form-control mt-10">
-          <label className="input-group">
-            <input
-              type="text"
-              placeholder="add details"
-              className="input input-bordered w-[300px]"
-              value={todo}
-              onChange={(ev) => setTodo(ev.target.value)}
-            />
-            <span className=" cursor-pointer" onClick={clickHandler}>
-              Add
-            </span>
-          </label>
-        </div>
+        {tab === "all" || tab === "active" ? (
+          <div className="form-control mt-10">
+            <label className="input-group">
+              <input
+                type="text"
+                placeholder="add details"
+                className="input input-bordered w-[300px]"
+                value={todo}
+                onChange={(ev) => setTodo(ev.target.value)}
+              />
+              <span className=" cursor-pointer" onClick={clickHandler}>
+                Add
+              </span>
+            </label>
+          </div>
+        ) : null}
         {tab === "active" ? (
-          <Active list={list} setList={setList} />
+          <Active list={list} setList={setList} tab={tab} />
         ) : tab === "completed" ? (
-          <Completed list={list} setList={setList} />
+          <Completed list={list} setList={setList} tab={tab} />
         ) : (
           <div className="form-control mt-10 min-w-[360px]">{listElems}</div>
         )}

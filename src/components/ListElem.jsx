@@ -2,10 +2,10 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 
-const ListElem = ({ elem, setList }) => {
+const ListElem = ({ elem, setList, tab }) => {
   const [checked, setChecked] = useState(elem.status === "completed");
 
-  const changeHandler = (ev) => {
+  const changeHandler = () => {
     setList((oldList) => {
       // return oldList.map((oldElem) => {
       //   if (elem.id === oldElem.id) {
@@ -48,7 +48,7 @@ const ListElem = ({ elem, setList }) => {
           {checked ? <del>{elem.text}</del> : elem.text}
         </span>
       </div>
-      {checked ? (
+      {checked && tab === "completed" ? (
         <FontAwesomeIcon
           icon={faTrashCan}
           className=" text-red-500 text-xl"

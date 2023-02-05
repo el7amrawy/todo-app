@@ -1,10 +1,10 @@
 import ListElem from "./ListElem";
 
-const Completed = ({ list, setList }) => {
+const Completed = ({ list, setList, tab }) => {
   /** ============ elems ============ **/
   const completedList = list.filter((elem) => elem.status === "completed");
   const completedListElems = completedList.map((elem) => (
-    <ListElem elem={elem} setList={setList} key={elem.id} />
+    <ListElem elem={elem} setList={setList} key={elem.id} tab={tab} />
   ));
 
   return (

@@ -1,11 +1,11 @@
 import ListElem from "./ListElem";
 
-const Active = ({ list, setList }) => {
+const Active = ({ list, setList, tab }) => {
   /** ============ elems ============ **/
 
   const activeListElems = list.map((elem) => {
     if (elem.status === "active")
-      return <ListElem elem={elem} key={elem.id} setList={setList} />;
+      return <ListElem elem={elem} key={elem.id} setList={setList} tab={tab} />;
   });
 
   return (
